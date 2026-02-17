@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import lucasdasial.mjobs.entity.Candidate;
-import lucasdasial.mjobs.useCases.CreateCandidateUseCase;
+import lucasdasial.mjobs.entity.Company;
+import lucasdasial.mjobs.useCases.CreateCompanyUseCase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/candidate")
-public class CadidateController {
+@RequestMapping("/company")
+public class CompanyController {
 
     @Autowired
-    CreateCandidateUseCase createCandidateUseCase;
+    private CreateCompanyUseCase createCompanyUseCase;
 
-    @PostMapping("")
-    public ResponseEntity<Object> create(@Valid @RequestBody Candidate entity) {
+    @PostMapping("/")
+    public ResponseEntity<Object> create(@Valid @RequestBody Company companyEntity) {
+
         try {
-            var candidate = createCandidateUseCase.execute(entity);
-            return ResponseEntity.ok(candidate);
+            var result = this.createCompanyUseCase.execute(companyEntity);
+            return ResponseEntity.ok().body(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
 }

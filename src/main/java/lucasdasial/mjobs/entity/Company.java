@@ -15,8 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Candidate {
-
+public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -33,5 +32,4 @@ public class Candidate {
 
     @CreationTimestamp
     private LocalDateTime createdAt;
-
 }
